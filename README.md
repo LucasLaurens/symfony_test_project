@@ -2,3 +2,7 @@
 
 ## Features
 - Service
+- Event Subscriber
+- Command
+- MailInterface
+- Entity | Repository | CRUD
