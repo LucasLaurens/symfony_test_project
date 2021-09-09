@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StripeController!
+{% endblock %}
+
+{% block body %}
+	<h3>{{ product.name }}</h3>
+	<form action="{{ path('make.payment') }}" method="post">
+		<label for="price">Price:
+		</label>
+		<input type="hidden" name="price" id="price" value="{{ product.price }}">
+		<span>{{ product.price }}</span>
+		<button type="submit">Make a gift</button>
+	</form>
+
+{% endblock %}

@@ -4,5 +4,6 @@
 - Service
 - Event Subscriber
 - Command
-- MailInterface
+- Mail Interface
 - Entity | Repository | CRUD
+- Stripe

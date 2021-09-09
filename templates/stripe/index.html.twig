@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StripeController!
+{% endblock %}
+
+{% block body %}
+	<ul>
+		{% for product in products %}
+			<li style="display: flex;">
+				<span style="margin: 15px;">
+					<a href="{{ path('stripe.show', {id: product.id}) }}">{{ product.name|e }}</a>
+				</span>
+				<span style="margin: 15px;">{{ product.reference|e }}</span>
+				<span style="margin: 15px;">{{ product.description|e }}</span>
+				<span style="margin: 15px;">{{ product.price|e }}</span>
+			</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
