@@ -6,14 +6,16 @@
 
 {% block body %}
 	<h3>{{ product.name }}</h3>
-	<form action="{{ path('make.payment', {id: product.id}) }}" method="post" id="payment-form">
-		<div class="form-row">
-			<div id="card-elements"></div>
-			<div id="card-errors" role="alert"></div>
-		</div>
+	<div class="stripe-container">
+		<form action="{{ path('make.payment', {id: product.id}) }}" method="post" id="payment-form">
+			<div class="form-row">
+				<div id="card-elements"></div>
+				<div id="card-errors" role="alert"></div>
+			</div>
 
-		<button class="btn btn-primary mt-4">Acheter {{ product.price }}€</button>
-	</form>
+			<button style="margin-top: 1em;">Acheter {{ product.price }}€</button>
+		</form>
+	</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -84,14 +86,18 @@
 			InputIntentId.setAttribute('type', 'hidden');
 			InputIntentId.setAttribute('name', 'stripeIntentId');
 			InputIntentId.setAttribute('value', intent.id);
+
 			InputIntentPaymentMethod.setAttribute('type', 'hidden');
 			InputIntentPaymentMethod.setAttribute('name', 'stripeIntentPaymentMethod');
 			InputIntentPaymentMethod.setAttribute('value', intent.payment_method);
+
 			InputIntentStatus.setAttribute('type', 'hidden');
 			InputIntentStatus.setAttribute('name', 'stripeIntentStatus');
 			InputIntentStatus.setAttribute('value', intent.status);
+
 			InputSubscription.setAttribute('type', 'hidden');
 			InputSubscription.setAttribute('name', 'subscription');
+			// product id
 			InputSubscription.setAttribute('value', subscription);
 
 			form.appendChild(InputIntentId);
