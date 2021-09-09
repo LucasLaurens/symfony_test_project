@@ -67,10 +67,12 @@ class ProductManager {
     public function create_subscription(array $resource, Product $product, User $user)
     {
         $order = new Order();
+
+        $price = (float) $product->getPrice();
         
         $order->setUser($user);
         $order->setProduct($product);
-        $order->setPrice($product->getPrice());
+        $order->setPrice($price);
         $order->setReference(uniqid('', false));
         $order->setBrandStripe($resource['stripeBrand']);
         $order->setLast4Stripe($resource['stripeLast4']);

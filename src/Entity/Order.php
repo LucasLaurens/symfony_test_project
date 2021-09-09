@@ -14,7 +14,7 @@ class Order
 {
     const DEVISE = 'eur';
 
-    use StripeTrait;
+    // use StripeTrait;
     
     /**
      * @ORM\Id

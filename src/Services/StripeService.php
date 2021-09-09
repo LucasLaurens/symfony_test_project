@@ -24,9 +24,10 @@ class StripeService
     public function paymentIntent(Product $product)
     {
         \Stripe\Stripe::setApiKey($this->privateKey);
-        
+
+        $price = (float) $product->getPrice();        
         return \Stripe\PaymentIntent::create([
-            'amount'               => ($product->getPrice() * 100),
+            'amount'               => $price * 100,
             'currency'             => Order::DEVISE,
             'payment_method_types' => ['card'],
         ]);
@@ -52,11 +53,11 @@ class StripeService
             $payment_intent = \Stripe\PaymentIntent::retrieve($stripeParameter['stripeIntentId']);
         }
 
-        if("succeeded" === $stripeParameter['stripeIntentId']) {
-            // TODO: make something
-        } else {
-            $payment_intent->cancel();
-        }
+        // if("succeeded" === $stripeParameter['stripeIntentId']) {
+        //     // TODO: make something
+        // } else {
+        //     $payment_intent->cancel();
+        // }
 
         return $payment_intent;
     }
@@ -68,8 +69,9 @@ class StripeService
      */
     public function stripe(array $stripeParameter, Product $product)
     {
+        $price = (float) $product->getPrice();
         return $this->payment(
-           ( $product->getPrice() * 100),
+           $price * 100,
            Order::DEVISE,
            $product->getName(),
            $stripeParameter

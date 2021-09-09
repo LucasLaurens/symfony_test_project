@@ -2,8 +2,10 @@
 
 namespace App\Command;
 
+use App\Entity\User;
 use App\Mails\PostMail;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,11 +20,17 @@ class LucasTestCommand extends Command
 
     private $postRepository;
     private $mailer;
+    private $em;
 
-    public function __construct(PostRepository $postRepository, MailerInterface $mailer)
+    public function __construct(
+        PostRepository $postRepository,
+        MailerInterface $mailer,
+        EntityManagerInterface $em
+    )
     {
         $this->postRepository = $postRepository;
         $this->mailer = $mailer;
+        $this->em = $em;
 
         parent::__construct();
     }
@@ -37,9 +45,18 @@ class LucasTestCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $post = $this->postRepository->find(1);
-        $mail = new PostMail($this->mailer);
-        $mail->sendEmail($post);
+        // $post = $this->postRepository->find(1);
+        // $mail = new PostMail($this->mailer);
+        // $mail->sendEmail($post);
+
+        // $user = new User();
+        // $user->setEmail('test@test.fr');
+        // $user->setPassword('test');
+        // $user->setRoles(['ROLE_USER']);
+
+        // $this->em->persist($user);
+        // $this->em->flush();
+
 
         return Command::SUCCESS;
     }
