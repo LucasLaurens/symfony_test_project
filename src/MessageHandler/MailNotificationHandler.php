@@ -3,8 +3,8 @@
 namespace App\MessageHandler;
  
 use App\Message\MailNotification;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
  
 class MailNotificationHandler implements MessageHandlerInterface

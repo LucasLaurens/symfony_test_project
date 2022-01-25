@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Mailer\MailerInterface;
 
 class TestController extends AbstractController
 {
@@ -32,8 +32,6 @@ class TestController extends AbstractController
  
         $form = $this->createForm(MessageType::class, $task);
  
-        // dd($this->getParameter('rabbitmq_dns'));
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
