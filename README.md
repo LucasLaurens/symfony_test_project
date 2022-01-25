@@ -6,3 +6,9 @@
 - Command
 - MailInterface
 - Entity | Repository | CRUD
+- Messenger
+
+<hr />
+
+### Messenger
+- Handler: Logic of the business (ex: MailNotificationHandler)
