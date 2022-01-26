@@ -26,3 +26,8 @@ class MyMessageHandler
     }
 }
 ```
+
+To consume your messages in queues
+```bash
+symfony console messenger:consume async -vv
+```
