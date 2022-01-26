@@ -8,6 +8,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-flow: column;
         }
         #message > div {
             display: flex;
@@ -15,11 +16,24 @@
             align-items: center;
             margin-top: 1rem;
         }
+        .messages {
+            margin-top: 3rem;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
 <div class="wrapper">
     {{ form(form) }}
+
+    <div class="messages">
+        {% if messages is defined %}
+            {% for message in messages %}
+                {% if true == message.isOnline %}
+                    <div class="message">{{message.subject}}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

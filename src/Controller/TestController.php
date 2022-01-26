@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Message\MailNotification;
+use App\Repository\MessageRepository;
 use App\Services\Calculator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,7 +24,7 @@ class TestController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function index(Request $request, EntityManagerInterface $em, MessageBusInterface $bus): Response
+    public function index(Request $request, EntityManagerInterface $em, MessageBusInterface $bus, MessageRepository $messageRepository): Response
     {
         $task = new Message();
         $task->setCreatedAt(new DateTime('now'))
@@ -38,12 +39,18 @@ class TestController extends AbstractController
             $em->persist($task);
             $em->flush();
 
-            $bus->dispatch(new MailNotification($task->getId(), $task->getSubject(), $task->getContent()));
+            try {
+                $bus->dispatch(new MailNotification($task->getId(), $task->getSubject(), $task->getContent(), $task->getIsOnline()));
+            } catch (\LogicException $e) {
+                throw new \Exception("The dispatch has encountered a problem: " . $e->getMessage());
+            }
  
             return $this->redirectToRoute('test');
         }
+
         return $this->render('test/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'messages' => $messageRepository->findAll()
         ]);
     }
 

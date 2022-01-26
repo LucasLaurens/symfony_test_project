@@ -26,3 +26,10 @@ services:
     App\EventSubscriber\DatabaseActivitySubscriber:
          tags:
             - {name: 'doctrine.event_subscriber'}
+    
+    App\MessageHandler\MailNotificationHandler:
+        arguments:
+            - '@mailer.mailer'
+            - '@doctrine.orm.default_entity_manager'
+            - '@App\Repository\MessageRepository'
+

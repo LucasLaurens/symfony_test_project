@@ -1,6 +1,6 @@
-# symfony_test_project
+# __symfony_test_project__
 
-## Features
+## __Features__
 - Service
 - Event Subscriber
 - Command
@@ -10,7 +10,7 @@
 
 <hr />
 
-### Messenger
+### __Messenger__
 - Handler: Logic of the business (ex: MailNotificationHandler)
 
 ```php
@@ -27,7 +27,12 @@ class MyMessageHandler
 }
 ```
 
-To consume your messages in queues
+#### __To create a new message and handler pair__
+```bash
+symfony console make:message
+```
+
+#### __To consume your messages in queues__
 ```bash
 symfony console messenger:consume async -vv
 ```

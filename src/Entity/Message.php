@@ -37,6 +37,16 @@ class Message
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_online = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Message
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIsOnline(): ?bool
+    {
+        return $this->is_online;
+    }
+
+    public function setIsOnline(bool $is_online): self
+    {
+        $this->is_online = $is_online;
 
         return $this;
     }
