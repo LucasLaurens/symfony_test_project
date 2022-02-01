@@ -7,6 +7,7 @@
 - MailInterface
 - Entity | Repository | CRUD
 - Messenger
+- Feature Behat
 
 <hr />
 
@@ -35,4 +36,15 @@ symfony console make:message
 #### __To consume your messages in queues__
 ```bash
 symfony console messenger:consume async -vv
+```
+
+### __Run the Behat test__
+```bash
+# with --init at the first time
+./vendor/bin/behat
+```
+
+### __Run the Selenium server__
+```bash
+selenium-server -port 4444
 ```

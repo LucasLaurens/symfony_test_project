@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column;
+        }
+        #message > div {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .posts {
+            margin-top: 3rem;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    {{ form(form) }}
+
+    <div class="posts">
+        {% if posts is defined %}
+            {% for post in posts %}
+                <div class="post">{{post.title}}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

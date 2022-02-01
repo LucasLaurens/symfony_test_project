@@ -1,0 +1,36 @@
+default:
+  # autoload: [ './tests/Functional/Context' ]
+  extensions:
+    FriendsOfBehat\SymfonyExtension: 
+      bootstrap: tests/bootstrap.php
+      # kernel:
+      #   class: App\Kernel
+  # extensions:
+  #   Behat\MinkExtension:
+  #     base_url: https://www.google.fr/
+  #     # default_session: symfony
+  #     javascript_session: selenium2
+  #     browser_name: chrome
+  #     # symfony: ~
+  #     selenium2: ~
+  suites:
+    defaults:
+    # core:
+      # paths:
+      #   - './tests/Functional/*'
+      paths:
+        features: tests/
+      contexts: 
+        # - FeatureContext 
+        # - PostContext
+        - App\Tests\Functional\Context\FeatureContext 
+        # - App\Tests\Functional\Context\PostContext
+        - App\Tests\Functional\Context\TestContext
+        # - ./tests/Functional/Context/FeatureContext 
+        # - ./tests/Functional/Context/PostContext
+      filters: {tags: '@test'}
+    # ui:
+    #   contexts:
+        # - FeatureContext
+        # - WebContext
+      # filters: {tags: '@ui'}

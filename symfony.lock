@@ -2,6 +2,24 @@
     "adyen/php-api-library": {
         "version": "10.1.0"
     },
+    "behat/behat": {
+        "version": "v3.10.0"
+    },
+    "behat/gherkin": {
+        "version": "v4.9.0"
+    },
+    "behat/mink": {
+        "version": "v1.9.0"
+    },
+    "behat/mink-browserkit-driver": {
+        "version": "v2.0.0"
+    },
+    "behat/mink-goutte-driver": {
+        "version": "v2.0.0"
+    },
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.3"
     },
@@ -87,6 +105,9 @@
     },
     "egulias/email-validator": {
         "version": "3.1.1"
+    },
+    "fabpot/goutte": {
+        "version": "v4.0.2"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"

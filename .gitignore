@@ -20,3 +20,6 @@
 ###< phpunit/phpunit ###
 .env
 .env.test
+/.vscode
+symfony.lock
+composer.lock

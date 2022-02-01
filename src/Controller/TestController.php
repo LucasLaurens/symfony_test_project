@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\Post;
 use App\Form\MessageType;
+use App\Form\PostType;
 use App\Message\MailNotification;
 use App\Repository\MessageRepository;
+use App\Repository\PostRepository;
 use App\Services\Calculator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,6 +54,30 @@ class TestController extends AbstractController
         return $this->render('test/index.html.twig', [
             'form' => $form->createView(),
             'messages' => $messageRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/homepage", name="homepage", methods={"GET","POST"})
+     */
+    public function homePageAction(Request $request, EntityManagerInterface $em, PostRepository $postRepository): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+ 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post = $form->getData();
+ 
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('homepage/index.html.twig', [
+            'form' => $form->createView(),
+            'posts' => $postRepository->findAll()
         ]);
     }
 
