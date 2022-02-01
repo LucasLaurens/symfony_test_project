@@ -16,7 +16,42 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
 
+    test.page:
+        class: App\Tests\Functional\Page\DeliveryProcessPage
+        parent: 'FriendsOfBehat\PageObjectExtension\Page\SymfonyPage'
+        public: true
+
+    test.context:
+        class: App\Tests\Functional\Context\DeliveryProcessContext
+        public: true
+        arguments:
+            - '@test.page'
+
     App\Tests\Functional\:
         resource: '../tests/Functional/*'
-        # exclude: '../tests/Functional/{Page}'
+        exclude: '../tests/Functional/{Page}'
+
+    App\Tests\Functional\Page\:
+        resource: '../tests/Functional/Page/*'
+        parent: 'FriendsOfBehat\PageObjectExtension\Page\SymfonyPage'
+        autoconfigure: false
+        public: false
+        autowire: true
+
+    FriendsOfBehat\PageObjectExtension\Page\Page:
+        abstract: true
+        autoconfigure: false
+        public: false
+        autowire: true
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+    FriendsOfBehat\PageObjectExtension\Page\SymfonyPage:
+        abstract: true
+        autoconfigure: false
+        public: false
+        autowire: true
+        parent: 'FriendsOfBehat\PageObjectExtension\Page\Page'
+        arguments:
+            - '@router'
 

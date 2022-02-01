@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Context;
+namespace App\Tests\Functional\Page;
 
-use App\Tests\Functional\Page\TestPage;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 
-class TestContext implements Context
+class TestPage implements Context
 {
-    public function __construct(private TestPage $testPage)
-    {
-    }
     /**
      * @Given I am an unauthenticated user
      */
     public function iAmAnUnauthenticatedUser()
     {
-        $this->testPage->iAmAnUnauthenticatedUser();
+        dd("test");
+        throw new PendingException();
     }
 
     /**
@@ -26,7 +23,7 @@ class TestContext implements Context
      */
     public function iRequestOfMyBaseRoute($arg1)
     {
-        $this->testPage->iRequestOfMyBaseRoute($arg1);
+        throw new PendingException();
     }
 
     /**
@@ -34,6 +31,6 @@ class TestContext implements Context
      */
     public function iShouldntSeeAnyErrors()
     {
-        $this->testPage->iShouldntSeeAnyErrors();
+        throw new PendingException();
     }
 }
