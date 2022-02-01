@@ -13,12 +13,13 @@ class TestContext implements Context
     public function __construct(private TestPage $testPage)
     {
     }
+
     /**
-     * @Given I am an unauthenticated user
+     * @Given I am a user
      */
-    public function iAmAnUnauthenticatedUser()
+    public function iAmAUser()
     {
-        $this->testPage->iAmAnUnauthenticatedUser();
+        $this->testPage->iAmAUser();
     }
 
     /**

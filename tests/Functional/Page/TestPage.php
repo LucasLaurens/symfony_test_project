@@ -6,16 +6,23 @@ namespace App\Tests\Functional\Page;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use PHPUnit\Framework\Assert;
 
-class TestPage implements Context
+class TestPage extends SymfonyPage
 {
+    public function getRouteName(): string
+    {
+        return 'homepage';
+    }
+
     /**
      * @Given I am an unauthenticated user
      */
-    public function iAmAnUnauthenticatedUser()
+    public function iAmAUser()
     {
-        dd("test");
-        throw new PendingException();
+        // $this->open();
+        // Assert::assertNotNull($this->response);
     }
 
     /**
@@ -23,7 +30,8 @@ class TestPage implements Context
      */
     public function iRequestOfMyBaseRoute($arg1)
     {
-        throw new PendingException();
+        // throw new PendingException();
+        Assert::assertNotNull($arg1);
     }
 
     /**
@@ -31,6 +39,6 @@ class TestPage implements Context
      */
     public function iShouldntSeeAnyErrors()
     {
-        throw new PendingException();
+        // throw new PendingException();
     }
 }
