@@ -44,6 +44,11 @@ symfony console messenger:consume async -vv
 ./vendor/bin/behat
 ```
 
+### __Run the php unit test__
+```bash
+php bin/phpunit
+```
+
 ### __Run the Selenium server__
 ```bash
 selenium-server -port 4444
