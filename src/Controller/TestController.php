@@ -34,7 +34,7 @@ class TestController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function index(Request $request, EntityManagerInterface $em, MessageBusInterface $bus, MessageRepository $messageRepository): Response
+    public function index(Request $request, MessageBusInterface $bus, MessageRepository $messageRepository): Response
     {
         $message = new Message();
         $message->setCreatedAt(new DateTime('now'))
@@ -71,6 +71,7 @@ class TestController extends AbstractController
                 // }
 
 
+                // @todo Explain in commentary what the bus is for
                 $bus->dispatch(new MailNotification($message));
             } catch (\LogicException $e) {
                 throw new \Exception("The dispatch has encountered a problem: " . $e->getMessage());
@@ -79,6 +80,7 @@ class TestController extends AbstractController
             return $this->redirectToRoute('test');
         }
 
+        // @todo Recover messenger logs to see which messages have not been consumed
         $messages = $messageRepository->findBy(['is_online' => true], ['id' => 'DESC']);
 
         return $this->render('test/index.html.twig', [
