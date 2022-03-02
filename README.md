@@ -33,6 +33,14 @@ class MyMessageHandler
 symfony console make:message
 ```
 
+### __To start all server and check the mails__
+```bash
+docker-compose up -d
+symfony server:stop
+symfony serve -d
+symfony open:local:webmail
+```
+
 #### __To consume your messages in queues__
 ```bash
 symfony console messenger:consume async -vv

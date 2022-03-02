@@ -15,12 +15,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Mime\Email;
 
 class TestController extends AbstractController
 {
-    public function __construct(protected Calculator $calculator)
+    public function __construct(
+        protected Calculator $calculator,
+        private MailerInterface $mailer,
+        private MessageRepository $messageRepository,
+        private EntityManagerInterface $em
+    )
     {
     }
 
@@ -29,31 +36,55 @@ class TestController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em, MessageBusInterface $bus, MessageRepository $messageRepository): Response
     {
-        $task = new Message();
-        $task->setCreatedAt(new DateTime('now'))
+        $message = new Message();
+        $message->setCreatedAt(new DateTime('now'))
              ->setUpdatedAt(new DateTime('now'));
- 
-        $form = $this->createForm(MessageType::class, $task);
- 
+
+        $form = $this->createForm(MessageType::class, $message);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $task = $form->getData();
- 
-            $em->persist($task);
-            $em->flush();
+            $message = $form->getData();
 
             try {
-                $bus->dispatch(new MailNotification($task->getId(), $task->getSubject(), $task->getContent(), $task->getIsOnline()));
+                // * Before using symfony messenger with queues
+                // $email = (new Email())
+                //     ->from('me@example.com')
+                //     ->to('you@example.com')
+                //     ->subject('test')
+                //     ->html('<p>test</p>');
+
+                // $this->mailer->send($email);
+
+                // sleep(10);
+
+                // try {
+                //     $message = new Message();
+                //     $message->setIsOnline(true);
+                //     $message->setContent($notification->getContent());
+                //     $message->setSubject($notification->getSubject());
+
+                //     $this->em->persist($message);
+                //     $this->em->flush();
+                // } catch (\Exception $e) {
+                //     dd($e->getMessage());
+                // }
+
+
+                $bus->dispatch(new MailNotification($message));
             } catch (\LogicException $e) {
                 throw new \Exception("The dispatch has encountered a problem: " . $e->getMessage());
             }
- 
+
             return $this->redirectToRoute('test');
         }
 
+        $messages = $messageRepository->findBy(['is_online' => true], ['id' => 'DESC']);
+
         return $this->render('test/index.html.twig', [
             'form' => $form->createView(),
-            'messages' => $messageRepository->findAll()
+            'messages' => $messages,
+            'count' => count($messages)
         ]);
     }
 
@@ -64,11 +95,11 @@ class TestController extends AbstractController
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
- 
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
- 
+
             $em->persist($post);
             $em->flush();
 
@@ -89,7 +120,7 @@ class TestController extends AbstractController
         // $age = $req->query->get('age', 0);
         // attributes = attribute slug
         // $age = $req->attributes->get('age');
-        
+
         // return new Response("Vous avez $age ans", 200);
         $tva = $this->calculator->tva(100, 20);
         dd($tva);

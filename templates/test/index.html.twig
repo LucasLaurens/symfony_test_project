@@ -27,11 +27,10 @@
     {{ form(form) }}
 
     <div class="messages">
+        <p><strong>There are {{count}} message(s) that are online</strong></p>
         {% if messages is defined %}
             {% for message in messages %}
-                {% if true == message.isOnline %}
-                    <div class="message">{{message.subject}}</div>
-                {% endif %}
+                <div class="message">{{message.subject}}</div>
             {% endfor %}
         {% endif %}
     </div>
