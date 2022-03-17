@@ -10,4 +10,7 @@
 
 autowiring.message.test:
   path: '/autowiring/message/{id}'
-  controller: App\Controller\TestController::autowiringMessageTest
+  # controller: App\Controller\TestController::autowiringMessageTest
+  methods: [GET]
+  defaults:
+    _controller: App\Controller\TestController::autowiringMessageTest

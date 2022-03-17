@@ -39,10 +39,10 @@ services:
     #     class: App\Entity\MessageInterface
     #     autowire: true
 
-    # app.controller.test:
-    #     class: App\Controller\TestController
-    #     autowire: true
-    #     tags: ['controller.service_arguments']
+    app.controller.test:
+        class: App\Controller\TestController
+        autowire: false
+        tags: ['controller.service_arguments']
 
 
     # App\Tests\Functional\:
