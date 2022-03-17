@@ -36,9 +36,7 @@ class TestController extends AbstractController
     {
     }
 
-    // #[Route('/autowiring/message/{id}', name: 'autowiring.message.test')]
-    // #[ParamConverter('message', class: 'SensioBlogBundle:Post')]
-    public function autowiringMessageTest(?Message $message): Response
+    public function autowiringMessageTest(?Message $message = null): Response
     {
         if (null === $message) {
             return new Response('There are no messages that match this id', Response::HTTP_INTERNAL_SERVER_ERROR);

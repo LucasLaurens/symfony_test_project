@@ -41,6 +41,7 @@ services:
 
     app.controller.test:
         class: App\Controller\TestController
+        public: true
         autowire: false
         tags: ['controller.service_arguments']
 

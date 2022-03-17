@@ -8,9 +8,8 @@
   # requirements:
   #   age: \d+
 
-autowiring.message.test:
-  path: '/autowiring/message/{id}'
-  # controller: App\Controller\TestController::autowiringMessageTest
-  methods: [GET]
+autowiring_message_test:
+  path: '/autowiring/{id}/message'
+  methods: [GET, PUT]
   defaults:
     _controller: App\Controller\TestController::autowiringMessageTest
