@@ -2,23 +2,28 @@
 
 namespace App\Controller;
 
+use DateTime;
+
+use App\Services\Calculator;
+use App\Message\MailNotification;
+
 use App\Entity\Message;
 use App\Entity\Post;
+
 use App\Form\MessageType;
 use App\Form\PostType;
-use App\Message\MailNotification;
-use App\Repository\MessageRepository;
+
 use App\Repository\PostRepository;
-use App\Services\Calculator;
-use DateTime;
+use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Mime\Email;
 
 class TestController extends AbstractController
 {
@@ -29,6 +34,16 @@ class TestController extends AbstractController
         private EntityManagerInterface $em
     )
     {
+    }
+
+    // #[Route('/autowiring/message/{id}', name: 'autowiring.message.test')]
+    // #[ParamConverter('message', class: 'SensioBlogBundle:Post')]
+    public function autowiringMessageTest(?Message $message): Response
+    {
+        if (null === $message) {
+            return new Response('There are no messages that match this id', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new Response($message->getSubject(), Response::HTTP_OK);
     }
 
     /**
@@ -110,7 +125,8 @@ class TestController extends AbstractController
 
         return $this->render('homepage/index.html.twig', [
             'form' => $form->createView(),
-            'posts' => $postRepository->findAll()
+            'posts' => $postRepository->findAll(),
+            'lastPost' => $postRepository->findBy([], ['id' => 'DESC'], 1, 0)[0]
         ]);
     }
 

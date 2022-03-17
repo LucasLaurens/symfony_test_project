@@ -7,3 +7,7 @@
 #   #   age: 1
   # requirements:
   #   age: \d+
+
+autowiring.message.test:
+  path: '/autowiring/message/{id}'
+  controller: App\Controller\TestController::autowiringMessageTest

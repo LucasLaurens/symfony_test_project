@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\MessageRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MessageRepository;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
  */
-class Message
+class Message implements MessageInterface
 {
     /**
      * @ORM\Id
