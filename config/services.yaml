@@ -43,6 +43,7 @@ services:
         class: App\Controller\TestController
         public: true
         autowire: false
+        autoconfigure: false
         tags: ['controller.service_arguments']
 
 
