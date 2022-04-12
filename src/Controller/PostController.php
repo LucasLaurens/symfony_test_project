@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Entity\PostInterface;
 use App\Repository\PostRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/post")
@@ -51,7 +53,8 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", name="post_show", methods={"GET"})
      */
-    public function show(Post $post): Response
+    #[ParamConverter('post', class: Post::class)]
+    public function show(PostInterface $post): Response
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
@@ -61,7 +64,8 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Post $post): Response
+    #[ParamConverter('post', class: Post::class)]
+    public function edit(Request $request, PostInterface $post): Response
     {
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -81,7 +85,8 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", name="post_delete", methods={"POST"})
      */
-    public function delete(Request $request, Post $post): Response
+    #[ParamConverter('post', class: Post::class)]
+    public function delete(Request $request, PostInterface $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
