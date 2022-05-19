@@ -23,13 +23,31 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    App\EventSubscriber\DatabaseActivitySubscriber:
-         tags:
+    app.event.subscriber.database.activity:
+        class: App\EventSubscriber\DatabaseActivitySubscriber
+        tags:
             - {name: 'doctrine.event_subscriber'}
-    
-    App\MessageHandler\MailNotificationHandler:
+
+    app.message.handler.mail.notification:
+        class: App\MessageHandler\MailNotificationHandler
         arguments:
             - '@mailer.mailer'
             - '@doctrine.orm.default_entity_manager'
             - '@App\Repository\MessageRepository'
+
+    # app.entity.interface.message:
+    #     class: App\Entity\MessageInterface
+    #     autowire: true
+
+    app.controller.test:
+        class: App\Controller\TestController
+        public: true
+        autowire: false
+        autoconfigure: false
+        tags: ['controller.service_arguments']
+
+
+    # App\Tests\Functional\:
+    #     resource: '../tests/Functional/*'
+        # exclude: '../tests/Functional/{Page}'
 

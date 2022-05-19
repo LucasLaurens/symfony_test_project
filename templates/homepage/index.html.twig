@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TestController!{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -16,7 +16,7 @@
             align-items: center;
             margin-top: 1rem;
         }
-        .messages {
+        .posts {
             margin-top: 3rem;
         }
     </style>
@@ -26,11 +26,11 @@
 <div class="wrapper">
     {{ form(form) }}
 
-    <div class="messages">
-        <p><strong>There are {{count}} message(s) that are online</strong></p>
-        {% if messages is defined %}
-            {% for message in messages %}
-                <div class="message">{{message.subject}}</div>
+    <div class="posts">
+        The last post has been created is {{lastPost.title}}
+        {% if posts is defined %}
+            {% for post in posts %}
+                <div class="post">{{post.title}}</div>
             {% endfor %}
         {% endif %}
     </div>

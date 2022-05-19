@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <div class="row">
+        {% for book in books %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>
+                        {{ book.name }} - {{ book.price }}
+                    </h2>
+                </div>
+                <hr>
+                <a href="{{ path('app_add_book', {id: book.id}) }}" class="btn btn-success float-right">
+                    <i class="fas fa-shopping-cart mr-1"></i>
+                    Ajouter
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

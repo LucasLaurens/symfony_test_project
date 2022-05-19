@@ -7,3 +7,9 @@
 #   #   age: 1
   # requirements:
   #   age: \d+
+
+autowiring_message_test:
+  path: '/autowiring/{id}/message'
+  methods: [GET, PUT]
+  defaults:
+    _controller: App\Controller\TestController::autowiringMessageTest
