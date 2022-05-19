@@ -9,4 +9,5 @@ enum ShipmentType: string
     case STATUS_TRANSMITTED = 'transmitted';
     case STATUS_SHIPPED = 'shipped';
     case STATUS_DELIVERED = 'delivered';
+    case STATUS_CANCELED = 'canceled';
 }

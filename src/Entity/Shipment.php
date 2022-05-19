@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ShipmentRepository::class)
  */
-class Shipment
+class Shipment implements ShipmentInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private readonly int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -27,10 +27,10 @@ class Shipment
      */
     private $state;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    // public function getId(): ?int
+    // {
+    //     return $this->id;
+    // }
 
     public function getCode(): ?string
     {
