@@ -1,0 +1,13 @@
+{% macro make(items, entity) %}
+    <ul>
+        {% for item in items %}
+            {% if 'Shipment' in entity %}
+                <li>{{ item.code }}</li>
+            {# {% elseif entity %}
+                <li>{{ item.title }}</li>
+            {% else %}
+                <li>{{ item.name }}</li> #}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endmacro %}

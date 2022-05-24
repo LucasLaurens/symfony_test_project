@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Shipment;
 use App\Entity\ShipmentInterface;
 use App\Enum\ShipmentType;
 use App\Repository\ShipmentRepository;
@@ -53,7 +54,8 @@ class ShipmentsController extends AbstractController
         // dd(0o16 === 14);
 
         return $this->render('shipments/index.html.twig', [
-            'controller_name' => 'ShipmentsController',
+            'shipments' => $shipmentRepository->findAll(),
+            'entity' => Shipment::class
         ]);
     }
 

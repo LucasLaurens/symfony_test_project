@@ -1,20 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShipmentsController!{% endblock %}
+{% import "macro/_list.html.twig" as list %}
+
+{% block title %}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
+<div class="container">
+    <h2>Basis</h2>
     <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lucas.laurens@unifygroup.com/Documents/symfony_test_project/src/Controller/ShipmentsController.php'|file_link(0) }}">src/Controller/ShipmentsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lucas.laurens@unifygroup.com/Documents/symfony_test_project/templates/shipments/index.html.twig'|file_link(0) }}">templates/shipments/index.html.twig</a></code></li>
+        {% for shipment in shipments %}
+            <li>{{ shipment.code }}</li>
+        {% endfor %}
     </ul>
+    <br><br>
+    <h2>Macro</h2>
+    {{ list.make(shipments, entity) }}
+    <br><br>
+    <h2>Include</h2>
+    {{ include('components/_list.html.twig', {
+        'items': shipments,
+        'entity': entity
+    }) }}
 </div>
 {% endblock %}
