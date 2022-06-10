@@ -53,9 +53,14 @@ class ShipmentsController extends AbstractController
         // dd(0o16 === 16);
         // dd(0o16 === 14);
 
+        $indexs = [1, 2, 3, 4];
+        $index = 3;
+
         return $this->render('shipments/index.html.twig', [
             'shipments' => $shipmentRepository->findAll(),
-            'entity' => Shipment::class
+            'entity' => Shipment::class,
+            'indexs' => $indexs,
+            'index' => $index
         ]);
     }
 

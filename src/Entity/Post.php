@@ -32,6 +32,11 @@ class Post implements PostInterface
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     */
+    private $category_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Post implements PostInterface
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?Category
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(?Category $category_id): self
+    {
+        $this->category_id = $category_id;
 
         return $this;
     }

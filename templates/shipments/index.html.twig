@@ -6,6 +6,13 @@
 
 {% block body %}
 <div class="container">
+
+    {% if index in [2, 3] %}
+        {{ index }} is ok !
+    {% else %}
+        {{ index }} is not ok !
+    {% endif %}
+
     <h2>Basis</h2>
     <ul>
         {% for shipment in shipments %}

@@ -54,10 +54,11 @@ class PostController extends AbstractController
      * @Route("/{id}", name="post_show", methods={"GET"})
      */
     #[ParamConverter('post', class: Post::class)]
-    public function show(PostInterface $post): Response
+    public function show(PostInterface $post, PostRepository $postRepository): Response
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'lastCategoryByPost' => $postRepository->findLastCategoryByPost($post)
         ]);
     }
 
