@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function PHPUnit\Framework\isEmpty;
+
 class BookController extends AbstractController
 {
     #[Route('/book', name: 'app_book')]
@@ -40,6 +42,24 @@ class BookController extends AbstractController
         return $this->renderForm('book/new.html.twig', [
             'book' => $book,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/book/expensive', name: 'app_book_expensive')]
+    public function bookExpensive(BookRepository $bookRepository): Response
+    {
+        try {
+            $books = $bookRepository->findExpensiveBooks(5000);
+
+            if (isEmpty($books)) {
+                throw new \Exception("There is no books for now");
+            }
+        } catch (\Exception $e) {
+            $this->addFlash('error', $e->getMessage());
+        }
+
+        return $this->render('book/expensive.html.twig', [
+            'books' => $books
         ]);
     }
 

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <ul>
+        {% for book in books %}
+            name: {{ book.name }} <br />
+            slug: {{ book.slug }} <br />
+            price: {{ (book.price / 100) |number_format(2) }} <br />
+            color: <input type="color" disabled value="{{ book.color }}"> <br />
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

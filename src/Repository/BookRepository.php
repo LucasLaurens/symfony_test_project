@@ -45,6 +45,16 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    public function findExpensiveBooks($price)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.price >= :price')
+            ->setParameter('price', $price)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */
