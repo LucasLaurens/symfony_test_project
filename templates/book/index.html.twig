@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/Users/lucas.laurens@unifygroup.com/Documents/symfony_test_project/src/Controller/BookController.php'|file_link(0) }}">src/Controller/BookController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/Users/lucas.laurens@unifygroup.com/Documents/symfony_test_project/templates/book/index.html.twig'|file_link(0) }}">templates/book/index.html.twig</a></code></li>
+    </ul>
+
+    <a href="{{ path('app_book_add') }}">Add</a>
+
+    <ul>
+        {% for book in books %}
+            name: {{ book.name }} <br />
+            slug: {{ book.slug }} <br />
+            price: {{ (book.price / 100) |number_format(2) }} <br />
+            color: <input type="color" disabled value="{{ book.color }}"> <br />
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

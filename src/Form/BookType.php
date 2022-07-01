@@ -2,27 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Post;
+use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class PostType extends AbstractType
+class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('name', TextType::class, [
                 'required'   => true,
             ])
-            ->add('content', TextareaType::class, [
+            ->add('slug', TextType::class, [
                 'required'   => true,
             ])
-            ->add('author', TextType::class, [
+            ->add('price', NumberType::class, [
+                'required'   => true,
+            ])
+            ->add('color', ColorType::class, [
                 'required'   => true,
             ])
             ->add('submit', SubmitType::class)
@@ -32,7 +35,7 @@ class PostType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Post::class,
+            'data_class' => Book::class,
         ]);
     }
 }

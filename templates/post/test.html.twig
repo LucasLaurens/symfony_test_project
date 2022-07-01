@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test{% endblock %}
+
+{% block body %}
+    {% if post.author %}
+        {{post.title}}
+    {% endif %}
+{% endblock %}

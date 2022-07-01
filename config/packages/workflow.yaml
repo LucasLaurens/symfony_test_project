@@ -1,0 +1,22 @@
+framework:
+    workflows:
+        post_request:
+            type: 'workflow'
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Post
+            initial_marking: new
+            places:
+                - new
+                - pending
+                - validated
+                - draft
+            transitions:
+                to_pending:
+                    from: [new, draft]
+                    to: pending
+                to_process:
+                    from: pending
+                    to: [new, validated, draft]
