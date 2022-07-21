@@ -141,4 +141,14 @@ class TestController extends AbstractController
         $tva = $this->calculator->tva(100, 20);
         dd($tva);
     }
+
+    /**
+     * @Route("/test-three", name="test.three")
+     */
+    public function testThreeAction(PostRepository $postRepository): Response
+    {
+        return $this->render('test/three.html.twig', [
+            'posts' => $postRepository->findAll(),
+        ]);
+    }
 }

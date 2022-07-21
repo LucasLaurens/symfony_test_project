@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% set pathImage = "build/images/gb_giftcard.png" %}
+
+{% block stylesheets %}
+<style>
+.posts {
+    background-image: url({{ pathImage }});
+    background-size: cover;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="posts">
+        {% for post in posts %}
+            <div class="post">
+                <p>{{ post.title }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
